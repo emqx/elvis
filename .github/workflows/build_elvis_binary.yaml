@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - '*-emqx-*'  # Push events matching v*. e.g 1.0.0-emqx-1
+  pull_request: {}
 
 jobs:
   build-and-upload:
@@ -15,7 +16,9 @@ jobs:
           otp-version: 24
           rebar3-version: 3.19
       - run: rebar3 escriptize
+      - run: _build/default/bin/elvis --version
       - name: Create Release
+        if: github.event_name == 'push'
         uses: softprops/action-gh-release@v1
         with:
           files: _build/default/bin/elvis
