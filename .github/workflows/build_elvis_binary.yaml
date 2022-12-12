@@ -13,6 +13,7 @@ jobs:
       - uses: erlef/setup-beam@v1
         with:
           otp-version: 24
+          rebar3-version: 3.19
       - run: rebar3 escriptize
       - name: Create Release
         uses: softprops/action-gh-release@v1
