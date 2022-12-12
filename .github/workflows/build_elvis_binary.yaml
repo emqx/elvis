@@ -1,0 +1,22 @@
+name: Build and upload
+
+on:
+  push:
+    tags:
+      - '*-emqx-*'  # Push events matching v*. e.g 1.0.0-emqx-1
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: 24
+      - run: rebar3 escriptize
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: _build/default/bin/elvis
+          draft: false
+          prerelease: false
