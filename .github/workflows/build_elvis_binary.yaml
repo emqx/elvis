@@ -7,13 +7,13 @@ on:
 
 jobs:
   build-and-upload:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - name: build
         run: |
           docker info
-          docker run --rm -v "$(pwd):/src" --workdir /src erlang:21.3 rebar3 escriptize
+          docker run --rm -v "$(pwd):/src" --workdir /src erlang:26.2 rebar3 escriptize
           sudo mv _build/default/bin/elvis .
       - name: Create Release
         id: create_release
