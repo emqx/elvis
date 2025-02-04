@@ -9,3 +9,5 @@ logs
 elvis
 !priv/bash_completion/elvis
 !priv/zsh_completion/_elvis
+compile_commands.json
+.DS_Store
